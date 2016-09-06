@@ -1,6 +1,9 @@
 # wttd-eventex
 Main project of the course Welcome to the Django
 
+[![Build Status](https://travis-ci.org/raphaelcmacedo/wttd-eventex.svg?branch=master)](https://travis-ci.org/raphaelcmacedo/wttd-eventex)
+[![Code Health](https://landscape.io/github/raphaelcmacedo/wttd-eventex/master/landscape.svg?style=flat)](https://landscape.io/github/raphaelcmacedo/wttd-eventex/master)
+
 ## How to develop?
 
 1. Clone the repository.

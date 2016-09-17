@@ -42,7 +42,7 @@ class SubscriptionPostValid(TestCase):
         self.response = self.client.post('/inscricao/', data)
 
     def test_post(self):
-        self.assertEqual(302, self.response.status_code)
+        self.assertRedirects(self.response,'/inscricao/1/')
 
     def test_send_email(self):
         self.assertEqual(1, len(mail.outbox))
@@ -71,12 +71,4 @@ class SubscriptionPostInvalid(TestCase):
 
     def test_not_save_subscription(self):
         self.assertFalse(Subscription.objects.exists())
-
-class SubscribeSuccessMessage(TestCase):
-    def setUp(self):
-        data = dict(name='Raphael Macedo', cpf='00000000000', email='raphaelcmacedo@hotmail.com',phone='(00) 00000-0000')
-        self.response = self.client.post('/inscricao/', data, follow=True)
-
-    def test_message(self):
-        self.assertContains(self.response, 'Inscrição realizada com sucesso')
 

@@ -73,3 +73,10 @@ class SubsciptionsNewPostInvalid(TestCase):
     def test_not_save_subscription(self):
         self.assertFalse(Subscription.objects.exists())
 
+class TemaplateRegressionTest(TestCase):
+    def test_temaplate_has_non_field_errors(self):
+        invalid_data = dict(name = 'Raphael Macedo', cpf = '12345678901')
+        response = self.client.post(resolve_url('subscriptions:new'), invalid_data)
+
+        self.assertContains(response, '<ul class="errorlist nonfield">')
+

@@ -20,6 +20,22 @@ class SubscriptionValidation(TestCase):
         form = self.validated_form(cpf='1234')
         self.assertFormErrorCode(form, 'cpf', 'length')
 
+    def test_name_must_be_captilized(self):
+        form = self.validated_form(name = 'RAPHAEL MACEDO')
+        self.assertEqual('Raphael Macedo', form.cleaned_data['name'])
+
+    def test_email_is_optional(self):
+        form = self.validated_form(email = '')
+        self.assertFalse(form.errors)
+
+    def test_phone_is_optional(self):
+        form = self.validated_form(phone = '')
+        self.assertFalse(form.errors)
+
+    def test_must_inform_email_or_phone(self):
+        form = self.validated_form(email = '', phone = '')
+        self.assertListEqual(['__all__'], list(form.errors))
+
     def validated_form(self, **kwargs):
         valid = dict(name='Raphael Macedo', email='a@a.com', cpf='12345678901', phone='0000-0000')
         data = dict(valid, **kwargs)

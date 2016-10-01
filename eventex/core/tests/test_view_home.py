@@ -15,3 +15,13 @@ class HomeTest(TestCase):
     def test_subscription_link(self):
         expected = 'href="{}"'.format(resolve_url('subscriptions:new'))
         self.assertContains(self.response,expected)
+
+    def test_speakers(self):
+        expectations = ['Grace Hoper', 'http://hbn.link/hopper-pic', 'Alan Turing', 'http://hbn.link/turing-pic']
+        with self.subTest():
+            for expected in expectations:
+                self.assertContains(self.response, expected)
+
+    def test_speakers_link(self):
+        expected = 'href="{}#speakers'.format(resolve_url('home'))
+        self.assertContains(self.response, expected)

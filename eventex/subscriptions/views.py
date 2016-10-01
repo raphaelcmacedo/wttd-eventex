@@ -30,7 +30,8 @@ def create(request):
         return render(request, 'subscriptions/subscription_form.html', {"form": form})
 
     # Save on db
-    subscription = Subscription.objects.create(**form.cleaned_data)
+    #subscription = Subscription.objects.create(**form.cleaned_data)
+    subscription = form.save()#possible to use save since now it's a ModelForm
     _send_email(subscription)
 
     return HttpResponseRedirect(resolve_url('subscriptions:detail',subscription.pk))

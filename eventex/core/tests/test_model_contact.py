@@ -12,7 +12,7 @@ class ContactModelTest(TestCase):
             slug='raphael-macedo',
             photo='http://hbn.link/hopper-pic'
         )
-        #Create contact
+
 
 
     def test_email(self):

@@ -3,21 +3,16 @@
 
 {%  block content %}
 <section>
-    <div class="content row padding-bottom-3 desktop-12 container">
-        <h1>Obrigada por se inscrever!</h1>
-        <div class="desktop-6">
-            <p>Estes foram os dados que você forneceu na inscrição:</p>
-
-            <ul>
-                <li>Nome: {{ subscription.name }}</li>
-                <li>CPF: {{ subscription.cpf }}</li>
-                <li>Email: {{ subscription.email }}</li>
-                <li>Telefone: {{ subscription.phone }}</li>
-            </ul>
-            <p>Em até 48 horas úteis nossa equipe entrará em contato com você para concluirmos sua matrícula.</p>
-
+    <div class="speakers content row padding-bottom-3 desktop-8 container">
+        <h2>
+            <a href="{{ speaker.website }}">{{ speaker.name }}</a>
+        </h2>
+        <img class="photo" src="{{ speaker.photo }}"/>
+        <p>
+            {{ speaker.description |linebreaks }}
+        </p>
             
-        </div>
+
     </div>
 </section>
 {% endblock content %}

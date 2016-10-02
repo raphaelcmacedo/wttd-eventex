@@ -3,6 +3,7 @@ from django.shortcuts import resolve_url
 
 
 class HomeTest(TestCase):
+    fixtures = ['keynotes.json']
     def setUp(self):
         self.response = self.client.get(resolve_url('home'))
 
@@ -17,7 +18,13 @@ class HomeTest(TestCase):
         self.assertContains(self.response,expected)
 
     def test_speakers(self):
-        expectations = ['Grace Hoper', 'http://hbn.link/hopper-pic', 'Alan Turing', 'http://hbn.link/turing-pic']
+        expectations = [
+            'href="{}"'.format(resolve_url('speaker_detail',slug='grace-hopper')),
+            'Grace Hopper',
+            'http://hbn.link/hopper-pic',
+            'href="{}"'.format(resolve_url('speaker_detail', slug='alan-turing')),
+            'Alan Turing',
+            'http://hbn.link/turing-pic']
         with self.subTest():
             for expected in expectations:
                 self.assertContains(self.response, expected)

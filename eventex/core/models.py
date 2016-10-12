@@ -43,7 +43,7 @@ class Contact(models.Model):
     def __str__(self):
         return self.value
 
-class Talk(models.Model):
+class Activity(models.Model):
     title = models.CharField('Title', max_length=200)
     start = models.TimeField('Start', blank=True, null=True)
     description = models.TextField('Description', blank=True)
@@ -53,9 +53,22 @@ class Talk(models.Model):
     objects = PeriodManager()
 
     class Meta:
-        verbose_name='Contact',
-        verbose_name_plural='Contacts'
+        abstract = True
+        verbose_name='Talk',
+        verbose_name_plural='Talks'
 
     def __str__(self):
         return self.title
+
+
+class Talk(Activity):
+    pass
+
+
+class Course(Activity):
+    slots = models.IntegerField('Slots')
+
+    class Meta:
+        verbose_name='Course',
+        verbose_name_plural='Courses'
 

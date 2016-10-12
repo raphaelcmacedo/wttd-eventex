@@ -2,7 +2,7 @@ from django.shortcuts import resolve_url
 from django.test import TestCase
 
 from eventex.core.managers import PeriodManager
-from eventex.core.models import Talk, Speaker
+from eventex.core.models import Talk, Speaker, Course
 
 
 class TalkModelTest(TestCase):
@@ -43,6 +43,30 @@ class TalkModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('Título', str(self.talk))
+        
+class CourseModelTest(TestCase):
+    def setUp(self):
+        self.course= Course.objects.create(
+            title = 'Título',
+            start ='10:00',
+            description = 'Descrição',
+            slots = 20
+        )
+
+    def test_create(self):
+        self.assertTrue(Course.objects.exists())
+
+    def test_has_speakers(self):
+        self.speaker = self.course.speakers.create(
+            name='Raphael Macedo',
+            slug='raphael-macedo',
+            photo='http://hbn.link/hopper-pic'
+        )
+
+        self.assertEqual(1, self.course.speakers.count())
+
+    def test_str(self):
+        self.assertEqual('Título', str(self.course))
 
 class PeriodManagerTest(TestCase):
     def setUp(self):
